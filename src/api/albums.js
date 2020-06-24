@@ -7,20 +7,20 @@ export const getAlbums = () => {
   })
 }
 
-export const postAlbums = (data, user) => {
+export const postAlbums = (album1, album2, album3, album1Artist, album2Artist, album3Artist, week, user) => {
   return axios({
     url: apiUrl + '/weeklyalbums',
     method: 'POST',
     data: {
       weeklyAlbums: {
-        week: data.week,
-        album1Artist: data.album1Artist,
-        album1: data.album1,
-        album2Artist: data.album2Artist,
-        album2: data.album2,
-        album3Artist: data.album3Artist,
-        album3: data.album3,
-        active: data.active
+        week: week,
+        album1Artist: album1Artist,
+        album1: album1,
+        album2Artist: album2Artist,
+        album2: album2,
+        album3Artist: album3Artist,
+        album3: album3,
+        active: true
       }
     },
     headers: {
@@ -35,15 +35,24 @@ export const postAlbums = (data, user) => {
 //   })
 // }
 
-export const addToCart = (id, product, user) => {
+export const makeInactive = (album1, album2, album3, album1Artist, album2Artist, album3Artist, week, id, token) => {
   return axios({
     url: apiUrl + '/weeklyalbums/' + id,
     method: 'PATCH',
     data: {
-      'product': product
+      weeklyAlbums: {
+        week: week,
+        album1Artist: album1Artist,
+        album1: album1,
+        album2Artist: album2Artist,
+        album2: album2,
+        album3Artist: album3Artist,
+        album3: album3,
+        active: false
+      }
     },
     headers: {
-      'Authorization': `Bearer ${user.token}`
+      'Authorization': `Bearer ${token}`
     }
   })
 }

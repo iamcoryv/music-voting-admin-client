@@ -6,5 +6,8 @@ export default {
   signOutSuccess: 'Come back soon!',
   changePasswordSuccess: 'Password changed successfully!',
   changePasswordFailure: 'Failed to change passwords. Check your old password and try again.',
-  getVotesFailure: 'Failed to find votes. Try again in a bit.'
+  getVotesFailure: 'Failed to find votes. Try again in a bit.',
+  getAlbumsFailure: 'Failed to find Albums. Try again in a bit.',
+  postAlbumsFailure: 'Failed to post new albums. Try again in a bit.',
+  postAlbumsSuccess: 'Your weekly albums are posted!'
 }

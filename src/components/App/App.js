@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import VotesPage from '../ViewVotes/VotesPage'
+import Albums from '../setNewWeek/Albums'
 import Header from '../Header/Header'
 import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
@@ -47,7 +48,10 @@ class App extends Component {
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
           <Route path='/votes' render={() => (
-            <VotesPage msgAlert={this.msgAlert} user={user} setSearch={this.setSearch}/>
+            <VotesPage msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route path='/updatealbums' render={() => (
+            <Albums msgAlert={this.msgAlert} user={user} />
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
