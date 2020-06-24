@@ -1,1 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
+
+.card {
+  margin: 15px;
+}
+
+.row {
+  text-align: center;
+}
+.weekForm {
+  text-align: center;
+  margin-left: 15px;
+  margin-top: 20px;
+}
+
+.voteResults {
+  display: inline;
+}
+
+.form-inline {
+  text-align: center !important;
+  align-content: center;
+}
+
+.dropdown-menu {
+  background-color: black;
+}

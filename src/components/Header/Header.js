@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
-    <Nav.Link href="#sign-up">Sign Up</Nav.Link>
+    <NavDropdown title="My Account" id="basic-nav-dropdown">
+      <NavDropdown.Item href="#change-password"><Nav.Link href="#change-password">Change Password</Nav.Link></NavDropdown.Item>
+      <NavDropdown.Item href="#sign-out"><Nav.Link href="#sign-out">Sign Out</Nav.Link></NavDropdown.Item>
+      <NavDropdown.Item href="#sign-up"><Nav.Link href="#sign-up">Sign Up</Nav.Link></NavDropdown.Item>
+    </NavDropdown>
     <Nav.Link href="#Votes">Votes</Nav.Link>
     <Nav.Link href="#updatealbums">Update Albums</Nav.Link>
   </Fragment>
@@ -20,12 +23,12 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
-    <Nav.Link to="/">Home</Nav.Link>
+
   </Fragment>
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
+  <Navbar bg="dark" variant="dark" expand="md">
     <Navbar.Brand href="#">
       capstone-project-client
     </Navbar.Brand>

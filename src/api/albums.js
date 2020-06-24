@@ -7,6 +7,12 @@ export const getAlbums = () => {
   })
 }
 
+export const getActive = () => {
+  return axios({
+    url: apiUrl + '/weeklyalbums/active'
+  })
+}
+
 export const postAlbums = (album1, album2, album3, album1Artist, album2Artist, album3Artist, week, user) => {
   return axios({
     url: apiUrl + '/weeklyalbums',

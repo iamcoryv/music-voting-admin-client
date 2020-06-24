@@ -9,5 +9,6 @@ export default {
   getVotesFailure: 'Failed to find votes. Try again in a bit.',
   getAlbumsFailure: 'Failed to find Albums. Try again in a bit.',
   postAlbumsFailure: 'Failed to post new albums. Try again in a bit.',
-  postAlbumsSuccess: 'Your weekly albums are posted!'
+  postAlbumsSuccess: 'Your weekly albums are posted!',
+  noVotesFailure: 'You have no votes!'
 }

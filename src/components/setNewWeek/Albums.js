@@ -56,7 +56,7 @@ const Albums = ({ msgAlert, user }) => {
     setWeek(event.target.value)
   }
 
-  const onSubmitAlbums = event => {
+  const onSubmitAlbums = async event => {
     event.preventDefault()
     getAlbums()
       .then(data => {
@@ -68,7 +68,7 @@ const Albums = ({ msgAlert, user }) => {
         const token = user.token
         makeInactive(album1, album2, album3, album1Artist, album2Artist, album3Artist, week, id, token)
       })
-    postAlbums(album1, album2, album3, album1Artist, album2Artist, album3Artist, week, user)
+      .then(postAlbums(album1, album2, album3, album1Artist, album2Artist, album3Artist, week, user))
       .then(() => msgAlert({
         heading: 'Posted Albums!',
         message: messages.getAlbumsSuccess,
@@ -82,7 +82,7 @@ const Albums = ({ msgAlert, user }) => {
           variant: 'danger'
         })
       })
-    setReload(!load)
+    await setReload(!load)
   }
 
   return (
@@ -157,7 +157,7 @@ const Albums = ({ msgAlert, user }) => {
           />
         </Form.Group>
         <Button
-          variant="primary"
+          variant="dark"
           type="submit">Submit</Button>
       </Form>
       <h2>Current week is {currentAlbums[currentAlbums.length - 1].week}</h2>
