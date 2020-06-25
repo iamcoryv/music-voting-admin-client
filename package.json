@@ -1,6 +1,6 @@
 {
   "name": "capstone-project-client",
-  "homepage": "https://<USERNAME>.github.io/<REPO NAME>",
+  "homepage": "https://iamcoryv.github.io/music-voting-admin-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
