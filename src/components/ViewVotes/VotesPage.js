@@ -44,11 +44,8 @@ const VotesPage = ({ msgAlert }) => {
     // currWeeksVotes = []
     // setCurrentWeek(event)
     for (let i = 0; i < weeklyVotes.length; i++) {
-      // console.log(typeof weeklyVotes[i].week)
-      // console.log(typeof currentWeek)
       if (weeklyVotes[i].week === parseInt(currentWeek)) {
         currWeeksVotes.push(weeklyVotes[i])
-        // console.log()
       }
       if (currWeeksVotes.length === 0) {
         msgAlert({
@@ -64,7 +61,6 @@ const VotesPage = ({ msgAlert }) => {
   }
   // const album1total = currWeeksVotes.reduce((accumulator, current) => accumulator + current.album1Vote, 0)
   // const album1 = album1total / currWeeksVotes.length
-  // console.log(album1)
   // const album2total = currWeeksVotes.reduce((accumulator, current) => accumulator + current.album2Vote, 0)
   // const album2 = album2total / currWeeksVotes.length
   // const album3total = currWeeksVotes.reduce((accumulator, current) => accumulator + current.album3Vote, 0)
@@ -76,7 +72,7 @@ const VotesPage = ({ msgAlert }) => {
       <div className="row col-6 voteResults">
         <h2>Voting Results</h2>
         <div className="row col-12">
-          <Form inline onSubmit={onWeekSearch}>
+          <Form inline onSubmit={onWeekSearch} className="searchBar">
             <Form.Group controlId="weekSearch">
               <Form.Label className="weekForm">Enter Week Number</Form.Label>
               <Form.Control
@@ -111,11 +107,11 @@ const VotesPage = ({ msgAlert }) => {
           <div key={weeklyVotes._id}>
             <Card style={{ width: '18rem' }} >
               <Card.Body>
-                <h6>Vote by {weeklyVotes.username}</h6>
+                <Card.Title><h4>Vote by {weeklyVotes.username}</h4></Card.Title>
                 <h6>Week {weeklyVotes.week}</h6>
-                <Card.Title><h3>{weeklyVotes.album1Vote}</h3></Card.Title>
-                <Card.Title><h3>{weeklyVotes.album2Vote}</h3></Card.Title>
-                <Card.Title><h3>{weeklyVotes.album3Vote}</h3></Card.Title>
+                <h6>Album1:{weeklyVotes.album1Vote}%</h6>
+                <h6>Album2:{weeklyVotes.album2Vote}%</h6>
+                <h6>Album3:{weeklyVotes.album3Vote}%</h6>
               </Card.Body>
             </Card>
           </div>

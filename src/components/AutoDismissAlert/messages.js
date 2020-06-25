@@ -10,5 +10,7 @@ export default {
   getAlbumsFailure: 'Failed to find Albums. Try again in a bit.',
   postAlbumsFailure: 'Failed to post new albums. Try again in a bit.',
   postAlbumsSuccess: 'Your weekly albums are posted!',
-  noVotesFailure: 'You have no votes!'
+  noVotesFailure: 'You have no votes!',
+  updateSuccess: 'Albums Updated!',
+  updateFailure: 'Could not update. Try again in a bit.'
 }

@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import VotesPage from '../ViewVotes/VotesPage'
 import Albums from '../setNewWeek/Albums'
+import UpdateWeek from '../UpdateWeek/UpdateWeek'
 import Header from '../Header/Header'
 import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
@@ -44,15 +45,17 @@ class App extends Component {
           />
         ))}
         <main className="container">
-          <Redirect from="/" to="/sign-in" />
           <AuthenticatedRoute path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
-          <AuthenticatedRoute path='/votes' render={() => (
+          <AuthenticatedRoute path='/votes' user={user} render={() => (
             <VotesPage msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute path='/updatealbums' render={() => (
+          <AuthenticatedRoute path='/newalbums' user={user} render={() => (
             <Albums msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute path='/updatealbums' user={user} render={() => (
+            <UpdateWeek msgAlert={this.msgAlert} user={user} />
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />

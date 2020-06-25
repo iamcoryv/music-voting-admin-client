@@ -11,7 +11,8 @@ const authenticatedOptions = (
       <NavDropdown.Item href="#sign-up"><Nav.Link href="#sign-up">Sign Up</Nav.Link></NavDropdown.Item>
     </NavDropdown>
     <Nav.Link href="#Votes">Votes</Nav.Link>
-    <Nav.Link href="#updatealbums">Update Albums</Nav.Link>
+    <Nav.Link href="#newalbums">New Albums</Nav.Link>
+    <Nav.Link href="#updatealbums">Edit Albums</Nav.Link>
   </Fragment>
 )
 
@@ -30,7 +31,7 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <Navbar bg="dark" variant="dark" expand="md">
     <Navbar.Brand href="#">
-      capstone-project-client
+      Omnivoracious Listeners Admin Site
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

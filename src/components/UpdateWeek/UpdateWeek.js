@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { getAlbums, postAlbums, makeInactive } from '../../api/albums'
+import { getActive, updateAlbums } from '../../api/albums'
 import messages from '../AutoDismissAlert/messages'
 // import Button from 'react-bootstrap/Button'
 // import Card from 'react-bootstrap/Card'
@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 const Albums = ({ msgAlert, user }) => {
-  // const [currentAlbums, setCurrentAlbums] = useState([{}])
+  const [currentAlbums, setCurrentAlbums] = useState([{}])
   // const [currentWeek, setCurrentWeek] = useState('')
   const [load, setReload] = useState(false)
   const [album1Artist, setAlbum1Artist] = useState('')
@@ -19,19 +19,28 @@ const Albums = ({ msgAlert, user }) => {
   const [album3Artist, setAlbum3Artist] = useState('')
   const [album3, setAlbum3] = useState('')
   const [week, setWeek] = useState('')
+  const [id, setId] = useState('')
 
   useEffect(() => {
-    // getActive()
-    //   .then(albums => {
-    //     setCurrentAlbums(albums.data.weeklyAlbums)
-    //   })
-    // .catch(() => {
-    //   msgAlert({
-    //     heading: 'Get Current Album Failed',
-    //     message: messages.getAlbumsFailure,
-    //     variant: 'danger'
-    //   })
-    // })
+    getActive()
+      .then(albums => {
+        setCurrentAlbums(albums.data.weeklyAlbums)
+        setAlbum1(albums.data.weeklyAlbums.album1)
+        setAlbum2(albums.data.weeklyAlbums.album2)
+        setAlbum3(albums.data.weeklyAlbums.album3)
+        setAlbum1Artist(albums.data.weeklyAlbums.album1Artist)
+        setAlbum3Artist(albums.data.weeklyAlbums.album3Artist)
+        setAlbum2Artist(albums.data.weeklyAlbums.album2Artist)
+        setWeek(albums.data.weeklyAlbums.week)
+        setId(albums.data.weeklyAlbums._id)
+      })
+      .catch(() => {
+        msgAlert({
+          heading: 'Get Current Album Failed',
+          message: messages.getAlbumsFailure,
+          variant: 'danger'
+        })
+      })
   }, [load])
   // I should combine these later what are you thinking??
   const handleChangeAlbum1Artist = event => {
@@ -56,41 +65,30 @@ const Albums = ({ msgAlert, user }) => {
     setWeek(event.target.value)
   }
 
-  const onSubmitAlbums = event => {
+  const onSubmitAlbums = (event) => {
     event.preventDefault()
-    getAlbums()
-      .then(data => {
-        const activeAlbums = data.data.weeklyAlbums.find(week => week.active)
-        const id = activeAlbums._id
-        const token = user.token
-        makeInactive(album1, album2, album3, album1Artist, album2Artist, album3Artist, week, id, token)
-      })
-      .then(postAlbums(album1, album2, album3, album1Artist, album2Artist, album3Artist, week, user))
-      .then(setAlbum1(''), setAlbum2(''), setAlbum3(''), setAlbum1Artist(''), setAlbum3Artist(''), setAlbum2Artist(''), setAlbum3Artist(''), setWeek(''))
-      // .then(getActive()
-      //   .then(albums => {
-      //     setCurrentAlbums(albums.data.weeklyAlbums)
-      //   }))
-      .then(setReload(!load))
+    const token = user.token
+    updateAlbums(album1, album2, album3, album1Artist, album2Artist, album3Artist, week, id, token)
       .then(() => msgAlert({
-        heading: 'Posted Albums!',
-        message: messages.getAlbumsSuccess,
+        heading: 'Albums Updated!',
+        message: messages.updateSuccess,
         variant: 'success'
       })
       )
       .catch(() => {
         msgAlert({
-          heading: 'Get Current Album Failed',
-          message: messages.getAlbumsFailure,
+          heading: 'Album update failed!',
+          message: messages.updateFailure,
           variant: 'danger'
         })
       })
+    setReload(!load)
   }
 
   return (
-    <div className="albumsForm">
-      <h2 className="text-center"> Set new albums for the week </h2>
-      <Form onSubmit={onSubmitAlbums}>
+    <div>
+      <h2 className="text-center"> Update the albums for this week </h2>
+      <Form onSubmit={onSubmitAlbums} className="albumsForm">
         <Form.Group>
           <Form.Label>Week</Form.Label>
           <Form.Control
@@ -99,7 +97,7 @@ const Albums = ({ msgAlert, user }) => {
             name="week"
             value={week}
             onChange={handleChangeWeek}
-            placeholder="Week Number"
+            placeholder={currentAlbums.week}
           />
         </Form.Group>
         <Form.Group>
@@ -110,7 +108,7 @@ const Albums = ({ msgAlert, user }) => {
             name="album1Artist"
             value={album1Artist}
             onChange={handleChangeAlbum1Artist}
-            placeholder="Artist"
+            placeholder={currentAlbums.album1Artist}
           />
           <Form.Control
             required
@@ -119,7 +117,7 @@ const Albums = ({ msgAlert, user }) => {
             value={album1}
             className="formMargins"
             onChange={handleChangeAlbum1}
-            placeholder="Album"
+            placeholder={currentAlbums.album1}
           />
         </Form.Group>
         <Form.Group>
@@ -130,7 +128,7 @@ const Albums = ({ msgAlert, user }) => {
             name="album2Artist"
             value={album2Artist}
             onChange={handleChangeAlbum2Artist}
-            placeholder="Artist"
+            placeholder={currentAlbums.album2Artist}
           />
           <Form.Control
             required
@@ -139,7 +137,7 @@ const Albums = ({ msgAlert, user }) => {
             value={album2}
             className="formMargins"
             onChange={handleChangeAlbum2}
-            placeholder="Album"
+            placeholder={currentAlbums.album2}
           />
         </Form.Group>
         <Form.Group>
@@ -150,7 +148,7 @@ const Albums = ({ msgAlert, user }) => {
             name="album3Artist"
             value={album3Artist}
             onChange={handleChangeAlbum3Artist}
-            placeholder="Artist"
+            placeholder={currentAlbums.album3Artist}
           />
           <Form.Control
             required
@@ -159,23 +157,13 @@ const Albums = ({ msgAlert, user }) => {
             value={album3}
             className="formMargins"
             onChange={handleChangeAlbum3}
-            placeholder="Album"
+            placeholder={currentAlbums.album3}
           />
         </Form.Group>
         <Button
           variant="dark"
           type="submit">Submit</Button>
       </Form>
-      {/* <h2>Current week is {currentAlbums.week}</h2>
-      <CardGroup>
-        <Card>
-          <Card.Body>
-            <h3>Album1:{currentAlbums.album1}</h3>
-            <h3>Album2:{currentAlbums.album2}</h3>
-            <h3>Album3:{currentAlbums.album3}</h3>
-          </Card.Body>
-        </Card>
-      </CardGroup> */}
     </div>
   )
 }

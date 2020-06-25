@@ -23,5 +23,27 @@
 }
 
 .dropdown-menu {
-  background-color: black;
+  background-color: #343a40;
+}
+
+.authForms {
+  max-width: 400px;
+}
+
+.albumsForm {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.searchBar{
+  margin: auto;
+}
+
+.formMargins{
+  margin-top: 10px;
+}
+
+.drop-item:hover{
+  color: #343a40;
 }
