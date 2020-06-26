@@ -57,6 +57,16 @@ export const updateAlbums = (album1, album2, album3, album1Artist, album2Artist,
   })
 }
 
+export const deleteAlbum = (id, token) => {
+  return axios({
+    url: apiUrl + '/weeklyalbums/' + id,
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+}
+
 export const makeInactive = (album1, album2, album3, album1Artist, album2Artist, album3Artist, week, id, token) => {
   return axios({
     url: apiUrl + '/weeklyalbums/' + id,

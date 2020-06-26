@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { getActive, updateAlbums } from '../../api/albums'
+import { getActive, updateAlbums, deleteAlbum } from '../../api/albums'
 import messages from '../AutoDismissAlert/messages'
 // import Button from 'react-bootstrap/Button'
 // import Card from 'react-bootstrap/Card'
@@ -85,6 +85,23 @@ const Albums = ({ msgAlert, user }) => {
     setReload(!load)
   }
 
+  const onDelete = () => {
+    const token = user.token
+    deleteAlbum(token, id)
+      .then(() => msgAlert({
+        heading: 'Albums Updated!',
+        message: messages.updateSuccess,
+        variant: 'success'
+      }))
+      .catch(() => {
+        msgAlert({
+          heading: 'Album update failed!',
+          message: messages.updateFailure,
+          variant: 'danger'
+        })
+      })
+  }
+
   return (
     <div>
       <h2 className="text-center"> Update the albums for this week </h2>
@@ -164,6 +181,9 @@ const Albums = ({ msgAlert, user }) => {
           variant="dark"
           type="submit">Submit</Button>
       </Form>
+      <Button
+        variant="dark"
+        onClick={onDelete}>Delete Current Album</Button>
     </div>
   )
 }
