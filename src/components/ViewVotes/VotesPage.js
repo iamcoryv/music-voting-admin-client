@@ -40,6 +40,10 @@ const VotesPage = ({ msgAlert }) => {
 
   const onWeekSearch = event => {
     event.preventDefault()
+    getVotes()
+      .then(votes => {
+        setWeeklyVotes(votes.data.weeklyVotes)
+      })
     currWeeksVotes = []
     // currWeeksVotes = []
     // setCurrentWeek(event)
