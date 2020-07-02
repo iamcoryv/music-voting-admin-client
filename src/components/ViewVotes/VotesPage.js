@@ -51,13 +51,13 @@ const VotesPage = ({ msgAlert }) => {
       if (weeklyVotes[i].week === parseInt(currentWeek)) {
         currWeeksVotes.push(weeklyVotes[i])
       }
-      if (currWeeksVotes.length === 0) {
-        msgAlert({
-          heading: 'No Votes!',
-          message: messages.noVotesFailure,
-          variant: 'danger'
-        })
-      }
+    }
+    if (currWeeksVotes.length === 0) {
+      msgAlert({
+        heading: 'No Votes!',
+        message: messages.noVotesFailure,
+        variant: 'danger'
+      })
     }
     setAlbum1((currWeeksVotes.reduce((accumulator, current) => accumulator + current.album1Vote, 0)) / currWeeksVotes.length)
     setAlbum2((currWeeksVotes.reduce((accumulator, current) => accumulator + current.album2Vote, 0)) / currWeeksVotes.length)
